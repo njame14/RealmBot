@@ -4,9 +4,11 @@ import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from WoW import *
+from WoW import RealmStatus
+from WoW import getRealmID
+from WoW import TrackRealm
 
-#Pull discord token and approved server from .env
+#Pull discord token from .env
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 
