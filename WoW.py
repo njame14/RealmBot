@@ -1,4 +1,4 @@
-from asyncio.windows_events import NULL
+import asyncio
 import os
 from matplotlib.pyplot import connect
 import requests
@@ -16,14 +16,14 @@ api_client = BlizzardApi(client_id, client_secret)
 #Inputs a str of the realm's name
 #Returns the realm id or -1 if not found
 def getRealmID(user_input):
-    user_input = user_input.replace(' ', '-').lower()
-    realm_list = api_client.wow.game_data.get_realm("us","en_US",user_input)
+    user_input = user_input.replace(' ', '-').lower() #Removes spaces and uncapitlizes input
+    realm = api_client.wow.game_data.get_realm("us","en_US",user_input) #Retrieves realm from Blizzard API
     
-    if ('Not Found' in realm_list.values()):
+    if ('Not Found' in realm.values()):
         response= "Realm could not be found, try again."
         return -1
     else:
-        realm_id = realm_list['id']
+        realm_id = realm['id']
         return realm_id
 
 def TrackRealm(realm_id):
